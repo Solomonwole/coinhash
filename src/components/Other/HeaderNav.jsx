@@ -7,12 +7,12 @@ import LogoM from '../../assets/logo_m.svg';
 import { FiMenu } from 'react-icons/fi';
 import MobileMenu from './Menu';
 import { StyledButton } from '../Styles/Styled';
-import { auth } from '../../firebase/FirebaseConfig';
 
 const HeaderNav = ({ userEmail }) => {
   const [menu, setMenu] = useState(false);
   const [logged, setLogged] = useState(false);
-  const currentUser = auth;
+  const currentUser = localStorage.getItem("HashuserName");
+
 
   useEffect(() => {
     userEmail !== null ? setLogged(true) : setLogged(false);
@@ -55,7 +55,7 @@ const HeaderNav = ({ userEmail }) => {
                 </li>
               </ul>
               <div className="btnauth">
-                {!logged ? (
+                {logged ? (
                   <Link to="/dashboard">
                     <StyledButton>Dashboard</StyledButton>
                   </Link>

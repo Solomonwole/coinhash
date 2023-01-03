@@ -5,13 +5,15 @@ import btcbarcode from '../../assets/Dashboard/barcode.jpg';
 import { AiOutlineCopy } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
-import { addDoc, collection } from 'firebase/firestore';
 import { db, auth } from '../../firebase/FirebaseConfig';
+import { doc, updateDoc } from 'firebase/firestore';
+import { useState } from 'react';
+
 
 const BtcWallet = () => {
   const price = localStorage.getItem('Price');
   const btcwallet = localStorage.getItem('BTC');
-  const user = auth.currentUser;
+  const [date, setDate] = useState(new Date());
 
   const handleCopy = () => {
     navigator.clipboard.writeText('bc1q763k9npdy9sddy5krww38nwmntdj894klnmwep');
@@ -24,13 +26,23 @@ const BtcWallet = () => {
     toast.success('Verifying transaction...');
 
     try {
-      addDoc(collection(db, 'btc'), {
-        userName: user.displayName,
-        email: user.email,
-        uid: user.uid,
+      setDate(new Date());
+      const day = date.getUTCDate();
+      const month = date.toLocaleString('en-US', { month: 'short' });
+      const year = date.getUTCFullYear();
+
+      const fullDate = {day, month, year};
+      
+      const userRef = doc(db, "users", auth.currentUser.uid);
+      updateDoc(userRef,{
+        balance: price,
+        btc: price,
+        btcwallet: btcwallet,
         price: price,
-        btc: btcwallet,
-      });
+        date: fullDate
+      })
+      console.log(fullDate)
+      
     } catch (error) {}
     localStorage.removeItem('BTC');
     localStorage.removeItem('ETH');
@@ -42,7 +54,7 @@ const BtcWallet = () => {
         <StyledPage>
           <img src={btcbarcode} alt="" />
           <StyledHP>
-            Amount: <b>{price}</b>
+            Amount: <b>${price}</b>
           </StyledHP>
           <div className="wallAdd">
             <StyledHP className="wallet">Wallet address:</StyledHP>

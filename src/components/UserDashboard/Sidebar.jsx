@@ -60,7 +60,7 @@ const Sidebar = (props) => {
           </ul>
           <ul>
             <li>
-              <Link to="/login" onClick={handleLogout}>
+              <Link onClick={handleLogout}>
                 <BiLogOut />
                 Logout
               </Link>

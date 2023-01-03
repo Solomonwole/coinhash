@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 import { StyledButton, StyledH3, StyledHP } from '../Styles/Styled';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CoinSelect from './CoinSelect';
 import { toast, ToastContainer } from 'react-toastify';
+
 
 const DashboardPage = () => {
   const [open, setOpen] = useState(false);
   const userName = localStorage.getItem('HashuserName');
+
+
 
   const handleCoin = () => {
     setOpen(true);

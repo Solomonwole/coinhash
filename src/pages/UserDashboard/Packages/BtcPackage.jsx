@@ -9,9 +9,9 @@ import {
 import { Link } from 'react-router-dom';
 
 const BtcPackage = () => {
-  const pprice = '$500';
-  const p2price = '$1500';
-  const p3price = '$3000';
+  const pprice = 5000;
+  const p2price = 10000;
+  const p3price = 30000;
 
 
   const hadle500 = () => {
@@ -34,7 +34,7 @@ const BtcPackage = () => {
           <StyledBox>
             <StyledHead>
               <StyledH3>91 Days | 6T</StyledH3>
-              <StyledH2 className="prices">{pprice}</StyledH2>
+              <StyledH2 className="prices">${pprice}</StyledH2>
             </StyledHead>
             <StyledInfo>
               <div className="info">
@@ -64,7 +64,7 @@ const BtcPackage = () => {
           <StyledBox>
             <StyledHead>
               <StyledH3>91 Days | 6T</StyledH3>
-              <StyledH2 className="prices">{p2price}</StyledH2>
+              <StyledH2 className="prices">${p2price}</StyledH2>
             </StyledHead>
             <StyledInfo>
               <div className="info">
@@ -94,7 +94,7 @@ const BtcPackage = () => {
           <StyledBox>
             <StyledHead>
               <StyledH3>91 Days | 6T</StyledH3>
-              <StyledH2 className="prices">{p3price}</StyledH2>
+              <StyledH2 className="prices">${p3price}</StyledH2>
             </StyledHead>
             <StyledInfo>
               <div className="info">

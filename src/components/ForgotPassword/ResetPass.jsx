@@ -3,6 +3,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import { useState, useEffect } from 'react';
 import { StyledButton, StyledH2 } from '../Styles/Styled';
 import ErrorMessage from '../Error/ErrorMessage';
+import { sendPasswordResetEmail } from 'firebase/auth';
+import { auth } from '../../firebase/FirebaseConfig';
 
 const EMAIL_REGEX =
   /^(?![_.-])((?![_.-][_.-])[a-zA-Z\d_.-]){0,63}[a-zA-Z\d]@((?!-)((?!--)[a-zA-Z\d-]){0,63}[a-zA-Z\d]\.){1,2}([a-zA-Z]{2,14}\.)?[a-zA-Z]{2,14}$/;
@@ -25,8 +27,23 @@ const ResetPassword = () => {
     setTrySubmit(true);
 
     if (email !== '') {
+      setLoading(true);
+      try {
+        sendPasswordResetEmail(auth, email).then(() => {
+          toast.success('Reset Link sent to email');
+          setLoading(false);
+        }).catch((err) => {
+          setLoading(false);
+          toast.error(err.code);
+          console.log("Error Code", err.code);
+        });
+      } catch (error) {
+        setLoading(false);
+        toast.error(error.code);
+        // console.log("Error Code", error.code);
+      }
     } else {
-      
+      setLoading(false);
     }
   };
   return (
@@ -41,7 +58,6 @@ const ResetPassword = () => {
             onChange={handleEmail}
             name="email"
             placeholder="Email address"
-            // required
           />
           {!valid && trySubmit ? (
             <ErrorMessage error={!email ? 'Field Required' : 'Invalid Email'} />
@@ -59,6 +75,7 @@ const ResetPassword = () => {
           )}
         </StyledForm>
       </StyledSign>
+      <ToastContainer />
     </>
   );
 };

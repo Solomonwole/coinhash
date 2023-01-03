@@ -6,7 +6,7 @@ import ErrorMessage from '../Error/ErrorMessage';
 import { toast, ToastContainer } from 'react-toastify';
 import { auth, db } from '../../firebase/FirebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-
+import { doc, getDoc } from 'firebase/firestore';
 
 const EMAIL_REGEX =
   /^(?![_.-])((?![_.-][_.-])[a-zA-Z\d_.-]){0,63}[a-zA-Z\d]@((?!-)((?!--)[a-zA-Z\d-]){0,63}[a-zA-Z\d]\.){1,2}([a-zA-Z]{2,14}\.)?[a-zA-Z]{2,14}$/;
@@ -18,7 +18,6 @@ const LoinComponent = () => {
   const [loading, setLoading] = useState(false);
   const [trySubmit, setTrySubmit] = useState(false);
   const [valid, setValid] = useState(false);
-  
 
   useEffect(() => {
     EMAIL_REGEX.test(email) ? setValid(true) : setValid(false);
@@ -42,22 +41,48 @@ const LoinComponent = () => {
         await signInWithEmailAndPassword(auth, email, password).then(
           (userCredential) => {
             const user = userCredential.user;
-            const userEmail = user.email;
-            localStorage.setItem('HashuserEmail', userEmail);
+            if (user.emailVerified) {
+              const userEmail = user.email;
 
-            const displayName = auth.currentUser.displayName;
-            localStorage.setItem('HashuserName', displayName);
+              localStorage.setItem('HashuserEmail', userEmail);
 
-            navigate('/dashboard');
-            setLoading(false);
+              const displayName = auth.currentUser.displayName;
+              localStorage.setItem('HashuserName', displayName);
+              const userUID = auth.currentUser.uid;
+              localStorage.setItem('HashuserUID', userUID);
+
+              try {
+                const documentSnapshot = doc(db, 'users', userUID).get();
+              console.log(documentSnapshot.data());
+
+              } catch (error) {
+                console.log(error);
+              }
+              // try {
+              //   const docRef = doc(db, 'users', userUID);
+              //   const docSnap = getDoc(docRef);
+
+              //   if (docSnap) {
+              //     console.log('Document data:', docSnap);
+              //   } else {
+              //     console.log('No such document!');
+              //   }
+              // } catch (error) {
+              //   console.log('Error', error);
+              // }
+
+              navigate('/dashboard');
+              setLoading(false);
+            } else {
+              navigate('/email-verification');
+              setLoading(false);
+            }
           }
         );
       } catch (error) {
-        toast.error(error.message);
+        toast.error(error.code);
         setLoading(false);
       }
-      
-
     } else {
       console.log('Field is required');
       setLoading(false);

@@ -4,16 +4,22 @@ import styled from 'styled-components';
 import { StyledButton, StyledH2, StyledHP } from '../Styles/Styled';
 import nofill from '../../assets/Signup/check.svg';
 import filled from '../../assets/Signup/check_filled.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import ErrorMessage from '../Error/ErrorMessage';
-import { auth } from '../../firebase/FirebaseConfig';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { auth, db } from '../../firebase/FirebaseConfig';
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  sendEmailVerification,
+} from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 
 const EMAIL_REGEX =
   /^(?![_.-])((?![_.-][_.-])[a-zA-Z\d_.-]){0,63}[a-zA-Z\d]@((?!-)((?!--)[a-zA-Z\d-]){0,63}[a-zA-Z\d]\.){1,2}([a-zA-Z]{2,14}\.)?[a-zA-Z]{2,14}$/;
 
 const SignupComponent = () => {
+  const navigate = useNavigate();
   const [check, setCheck] = useState(false);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -72,7 +78,20 @@ const SignupComponent = () => {
                   updateProfile(auth.currentUser, { displayName: username });
                   toast.success('Account successfully created');
 
+                  setDoc(doc(db, 'users', userCredential.user.uid), {
+                    username: username,
+                    email: email,
+                    balance: 0.0,
+                    btc: 0.0,
+                    eth: 0.0,
+                    btcwallet: '',
+                    ethwallet: '',
+                    price: '',
+                  });
+                  auth.useDeviceLanguage();
+                  sendEmailVerification(userCredential.user);
                   setLoading(false);
+                  navigate('/email-verification');
                 });
                 setUsername('');
                 setEmail('');
@@ -83,7 +102,7 @@ const SignupComponent = () => {
               } catch (err) {
                 console.log(err);
                 setLoading(false);
-                toast.error(err.message);
+                toast.error(err.code);
               }
             } else {
               console.log('Agree to terms and conditions');
@@ -117,7 +136,7 @@ const SignupComponent = () => {
             onChange={handleUsername}
             name="username"
             placeholder="Username"
-            className='username'
+            className="username"
           />
           {!username && trySubmit ? (
             <ErrorMessage error="Field Required" />
@@ -221,8 +240,8 @@ const StyledForm = styled.form`
   align-items: center;
   width: 100%;
 
-  .username{
-    text-transform:capitalize;
+  .username {
+    text-transform: capitalize;
   }
 
   input {

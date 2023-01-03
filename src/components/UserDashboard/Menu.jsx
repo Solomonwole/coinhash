@@ -76,7 +76,7 @@ const MobileMenuDashboard = ({ menu, closeMenu }) => {
                 </Link>
               </li>
               <li>
-                <Link to="/login" onClick={handleLogout}>
+                <Link onClick={handleLogout}>
                   <BiLogOut className='iconicon'/>
                   Logout
                 </Link>

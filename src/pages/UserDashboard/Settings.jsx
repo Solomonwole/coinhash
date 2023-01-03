@@ -3,6 +3,7 @@ import { updateProfile } from 'firebase/auth';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { auth } from '../../firebase/FirebaseConfig';
+import { updatePassword } from 'firebase/auth';
 import {
   StyledButton,
   StyledH3,
@@ -44,20 +45,20 @@ const Settings = () => {
           setLoading(true);
 
           try {
-            updateProfile(auth.currentUser, { password: password});
-            toast.success("Password changed")
+            const user = auth.currentUser;
+            updatePassword(user, password);
+            toast.success('Password changed');
             setLoading(false);
           } catch (error) {
-            toast.error(error.message)
+            toast.error(error.message);
             setLoading(false);
           }
-        }else{
-          setMatch(false)
+        } else {
+          setMatch(false);
         }
       } else {
         setPassword(false);
-        console.log("Field is empty");
-
+        console.log('Field is empty');
       }
     }
   };

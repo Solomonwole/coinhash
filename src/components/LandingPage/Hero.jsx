@@ -1,10 +1,10 @@
 import styled from "styled-components";
-// import Bg from "../../assets/BgVid/bg.mp4";
 import { StyledButton, StyledH1, StyledHP } from "../Styles/Styled";
 import { Link } from "react-router-dom";
 import mining from "../../assets/Home/mining.svg"
 
 const Hero = () => {
+ 
   return (
     <>
       <StyledHero>

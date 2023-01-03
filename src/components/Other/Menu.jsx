@@ -1,17 +1,25 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { AiOutlineClose } from "react-icons/ai";
-import { HashLink } from "react-router-hash-link";
-import "../Styles/new.css";
-import "../Styles/menu.css";
-import LogoM from "../../assets/logo_m.svg";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { AiOutlineClose } from 'react-icons/ai';
+import { HashLink } from 'react-router-hash-link';
+import '../Styles/new.css';
+import '../Styles/menu.css';
+import LogoM from '../../assets/logo_m.svg';
 
 const MobileMenu = ({ menu, closeMenu }) => {
+  const [logged, setLogged] = useState(false);
+  const currentUser = localStorage.getItem('HashuserName');
   useEffect(() => {
-    const body = document.querySelector("body");
-    body.style.overflow = menu ? "hidden" : "auto";
-  }, [menu]);
+    const body = document.querySelector('body');
+    body.style.overflow = menu ? 'hidden' : 'auto';
+
+    if (currentUser) {
+      setLogged(true);
+    } else {
+      setLogged(false);
+    }
+  }, [menu, currentUser]);
 
   if (!menu) {
     return null;
@@ -20,7 +28,7 @@ const MobileMenu = ({ menu, closeMenu }) => {
   return (
     <>
       <StyledOverlay>
-        <StyledMenuDrawer className={menu ? "slideInLeft" : "slideOutLeft"}>
+        <StyledMenuDrawer className={menu ? 'slideInLeft' : 'slideOutLeft'}>
           <StyledHeading>
             <Link to="/">
               <img src={LogoM} alt="" className="mobile" />
@@ -44,16 +52,26 @@ const MobileMenu = ({ menu, closeMenu }) => {
                   FAQ
                 </HashLink>
               </li>
-              <li>
-                <Link to="/login" onClick={closeMenu}>
-                  Login
-                </Link>
-              </li>
-              <li>
-                <Link to="/signup" onClick={closeMenu}>
-                  Signup
-                </Link>
-              </li>
+              {logged ? (
+                <li>
+                  <Link to="/dashboard" onClick={closeMenu}>
+                    Dashboard
+                  </Link>
+                </li>
+              ) : (
+                <>
+                  <li>
+                    <Link to="/login" onClick={closeMenu}>
+                      Login
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/signup" onClick={closeMenu}>
+                      Signup
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
           </StyledMenuList>
         </StyledMenuDrawer>
