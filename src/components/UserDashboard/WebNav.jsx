@@ -22,7 +22,7 @@ const WebNav = () => {
             <FiMenu onClick={handleMenu} className="menu-icon"/>
           </div>
           <div>
-            <Link to="/dashboard">
+            <Link to="/">
               <img src={logo} id="site-logo" alt="" className="logo" />
             </Link>
           </div>

@@ -1,18 +1,16 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
-import { HashLink } from 'react-router-hash-link';
 import '../Styles/new.css';
 import '../Styles/menu.css';
 import LogoM from '../../assets/logo_m.svg';
 import { MdSpaceDashboard } from 'react-icons/md';
-import { BsFillCreditCardFill } from 'react-icons/bs';
-import { FaWallet } from 'react-icons/fa';
-import { GoSettings } from 'react-icons/go';
-import { BiLogOut } from 'react-icons/bi';
-import { toast } from 'react-toastify';
+import { BiLogOut, BiSupport } from 'react-icons/bi';
 import { auth } from '../../firebase/FirebaseConfig';
+import { RiShoppingCartLine } from 'react-icons/ri';
+import { GiFireAxe, GiWallet } from 'react-icons/gi';
+import { FiSettings } from 'react-icons/fi';
 
 const MobileMenuDashboard = ({ menu, closeMenu }) => {
   useEffect(() => {
@@ -29,14 +27,6 @@ const MobileMenuDashboard = ({ menu, closeMenu }) => {
   if (!menu) {
     return null;
   }
-  const handlelow = () => {
-    toast.error('Low wallet balance', {
-      autoClose: 1000,
-    });
-
-    closeMenu();
-  };
- 
  
 
   return (
@@ -51,33 +41,46 @@ const MobileMenuDashboard = ({ menu, closeMenu }) => {
           </StyledHeading>
           <StyledMenuList>
             <ul>
-              <li>
-                <Link to="/dashboard" onClick={closeMenu} >
-                  <MdSpaceDashboard className='iconicon'/>
-                  Dashboard
-                </Link>
-              </li>
-              <li>
-                <Link to="/dashboard" onClick={closeMenu}>
-                  <BsFillCreditCardFill className='iconicon'/>
-                  Deposit
-                </Link>
-              </li>
-              <li>
-                <HashLink onClick={handlelow}>
-                  <FaWallet className='iconicon'/>
-                  Withdraw
-                </HashLink>
-              </li>
-              <li>
-                <Link to="/settings" onClick={closeMenu}>
-                  <GoSettings className='iconicon'/>
-                  Settings
-                </Link>
-              </li>
+            <li>
+              <NavLink to="/dashboard" onClick={closeMenu}>
+                <MdSpaceDashboard className="icon"/>
+                Dashboard
+              </NavLink >
+            </li>
+            <li>
+              <NavLink to="/hashrate" onClick={closeMenu}>
+                <RiShoppingCartLine className="icon"/>
+                Buy hashrate
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/workers" onClick={closeMenu}>
+                <GiFireAxe className="icon"/>
+                Workers
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/withdraw" onClick={closeMenu}>
+                <GiWallet className="icon"/>
+                Withdraw
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/settings" onClick={closeMenu}>
+                <FiSettings className="icon"/>
+                Settings
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/support" onClick={closeMenu}>
+                <BiSupport className="icon"/>
+                Support
+              </NavLink>
+            </li>
+             
               <li>
                 <Link onClick={handleLogout}>
-                  <BiLogOut className='iconicon'/>
+                  <BiLogOut className='icon'/>
                   Logout
                 </Link>
               </li>
@@ -152,7 +155,7 @@ ul {
             background: transparent;
         }
 }
-.iconicon{
+.icon{
   margin-right: 15px;
 }
 

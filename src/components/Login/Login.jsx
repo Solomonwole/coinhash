@@ -53,10 +53,10 @@ const LoinComponent = () => {
 
               try {
                 const documentSnapshot = doc(db, 'users', userUID).get();
-              console.log(documentSnapshot.data());
+              console.log("Data", documentSnapshot.data());
 
               } catch (error) {
-                console.log(error);
+                console.log("",error);
               }
               // try {
               //   const docRef = doc(db, 'users', userUID);

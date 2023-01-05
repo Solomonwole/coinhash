@@ -1,12 +1,16 @@
-import DashboardLayout from '../../../layout/DashboardLayout';
 import styled from 'styled-components';
-import { StyledButton, StyledH2, StyledH3, StyledHP } from '../../../components/Styles/Styled';
+import {
+  StyledButton,
+  StyledH2,
+  StyledH3,
+  StyledHP,
+} from '../../../components/Styles/Styled';
 import { Link } from 'react-router-dom';
 
 const EthPackage = () => {
-  const pprice = '$5000';
-  const p2price = '$25000';
-  const p3price = '$40000';
+  const pprice = '$5500';
+  const p2price = '$15000';
+  const p3price = '$4000';
 
   const hadle500 = () => {
     localStorage.setItem('Price', pprice);
@@ -19,13 +23,11 @@ const EthPackage = () => {
   };
   return (
     <>
-      <DashboardLayout>
+      <>
         <Styled>
-          <StyledH3 className="title">Select ETH Package</StyledH3>
         </Styled>
         <StyledP>
-
-        <StyledBox>
+          <StyledBox>
             <StyledHead>
               <StyledH3>91 Days | 6T</StyledH3>
               <StyledH2 className="prices">{pprice}</StyledH2>
@@ -113,12 +115,27 @@ const EthPackage = () => {
             </Link>
           </StyledBox>
         </StyledP>
-      </DashboardLayout>
+      </>
     </>
   );
 };
 
 // Styling
+
+const StyledP = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  @media screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+  }
+  @media screen and (min-width: 1338px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 20px;
+  }
+`;
 const StyledBox = styled.div`
   height: 460px;
   // width: 370px;
@@ -171,16 +188,4 @@ const Styled = styled.div`
   }
 `;
 
-const StyledP = styled.div`
-  @media screen and (min-width: 768px) {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 20px;
-  }
-  @media screen and (min-width: 1280px) {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 20px;
-  }
-`;
 export default EthPackage;

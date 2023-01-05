@@ -1,17 +1,19 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { MdSpaceDashboard } from 'react-icons/md';
-import { BsFillCreditCardFill } from 'react-icons/bs';
-import { FaWallet } from 'react-icons/fa';
-import { GoSettings } from 'react-icons/go';
+import { RiShoppingCartLine } from 'react-icons/ri';
+import { GiWallet } from 'react-icons/gi';
+import { GiFireAxe } from 'react-icons/gi';
+import { BiSupport } from 'react-icons/bi';
+import { FiSettings } from 'react-icons/fi';
 import { BiLogOut } from 'react-icons/bi';
 import LogoD from '../../assets/logo_d.svg';
-import { HashLink } from 'react-router-hash-link';
 import { toast } from 'react-toastify';
 import { auth } from '../../firebase/FirebaseConfig';
 
 const Sidebar = (props) => {
-  const handlelow = () => {
+  const navigate = useNavigate()
+;  const handlelow = () => {
     toast.error('Low wallet balance', {
       autoClose: 1000,
     });
@@ -21,52 +23,65 @@ const Sidebar = (props) => {
     auth.signOut();
     localStorage.removeItem('HashuserEmail');
     localStorage.removeItem('HashuserName');
+    navigate("/login")
   };
   return (
     <>
       <StyledSidebar>
-        <div>
-          <Link to="/dashboard">
-            <img src={LogoD} alt="" className="logo-img" />
-          </Link>
-        </div>
+        <StyledTop>
 
-        <section>
+        <div >
+            <Link to="/"><img src={LogoD} alt="" className="logo"/></Link>
+          </div>
+
+          <div className="menu">
           <ul>
             <li>
-              <Link to="/dashboard">
-                <MdSpaceDashboard />
+              <NavLink to="/dashboard">
+                <MdSpaceDashboard className="icon"/>
                 Dashboard
-              </Link>
+              </NavLink >
             </li>
             <li>
-              <HashLink to="/#">
-                <BsFillCreditCardFill />
-                Deposit
-              </HashLink>
+              <NavLink to="/hashrate">
+                <RiShoppingCartLine className="icon"/>
+                Buy hashrate
+              </NavLink>
             </li>
             <li>
-              <HashLink onClick={handlelow}>
-                <FaWallet />
+              <NavLink to="/workers">
+                <GiFireAxe className="icon"/>
+                Workers
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/withdraw" onClick={handlelow}>
+                <GiWallet className="icon"/>
                 Withdraw
-              </HashLink>
+              </NavLink>
             </li>
             <li>
-              <Link to="/settings">
-                <GoSettings />
+              <NavLink to="/settings">
+                <FiSettings className="icon"/>
                 Settings
-              </Link>
+              </NavLink>
             </li>
-          </ul>
-          <ul>
             <li>
-              <Link onClick={handleLogout}>
-                <BiLogOut />
-                Logout
-              </Link>
+              <NavLink to="/support">
+                <BiSupport className="icon"/>
+                Support
+              </NavLink>
             </li>
           </ul>
-        </section>
+          </div>
+         
+        </StyledTop>
+
+        <StyledBottom>
+          <div className="logout" onClick={handleLogout}>
+            <BiLogOut className="icon" /> Sign out
+          </div>
+        </StyledBottom>
       </StyledSidebar>
     </>
   );
@@ -77,107 +92,22 @@ const Sidebar = (props) => {
 export const StyledSidebar = styled.aside`
   z-index: 3;
   grid-area: sidebar;
-  padding: 32px 135px 32px 64px;
+  padding: 22px 22px;
   background-color: #011c37;
-  max-width: 280px;
+  width: 217px;
   height: 100vh;
   position: fixed;
   left: 0;
   top: 0;
-  /* bottom: 0; */
-  box-shadow: 2px 2px 8px rgba(120, 122, 125, 0.15);
 
-  display: grid;
-  grid-template-rows: 5% 95%;
-  gap: 64px;
+  // display: grid;
+  // grid-template-rows: 5% 95%;
+  // gap: 64px;
 
-  div {
-    margin-left: -80px;
-    .logo-img {
-      width: 230px;
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
-  section {
-    height: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  ul {
-    display: flex;
-    flex-direction: column;
-    gap: 37px;
-  }
-
-  li {
-    margin-left: -2rem;
-    list-style: none;
-
-    .active,
-    a:hover {
-      color: #54a2f7;
-
-      svg {
-        fill: #54a2f7;
-        stroke: #54a2f7;
-      }
-
-      &::before {
-        content: '';
-        position: absolute;
-        left: -3rem;
-        width: 4px;
-        height: 24px;
-        background: #54a2f7;
-        border-radius: 4px;
-      }
-    }
-
-    .active,
-    a:hover {
-      .requests {
-        color: #54a2f7;
-        svg {
-          fill: #54a2f7;
-          stroke: none;
-          * {
-            fill: #54a2f7 !important;
-          }
-        }
-      }
-    }
-  }
-
-  a,
-  button {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    font-weight: 600;
-    color: #a5a6ab;
-    line-height: 24px;
-    font-size: 16px;
-    margin-left: 2rem;
-    position: relative;
-  }
-
-  a svg {
-    fill: #a5a6a8;
-    stroke: #a5a6a8;
-  }
-
-  & > div > img:first-child {
-    display: none;
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-  }
-
-  .logo {
-    width: 10px;
-  }
 
   @media (max-width: 1140px) {
     transform: translateX(-100%);
@@ -191,6 +121,73 @@ export const StyledSidebar = styled.aside`
   &.open {
     transform: translateX(0);
     transition: transform 1s ease;
+  }
+`;
+
+const StyledTop = styled.div`
+  .logo {
+    width: 150px;
+    margin-bottom: 40px;
+  }
+
+  .menu {
+    a {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      color: #fff;
+      padding: 10px 14px;
+      opacity: 0.6;
+    }
+
+    a:hover {
+      padding: 10px 14px;
+      color: #fff;     
+      opacity: 1;  
+    }
+    a.active {
+      background: #0AC389;
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: #fff;  
+      opacity: 1;     
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+      li {
+        list-style: none;
+        margin: 20px 0;
+        align-items: center;
+        font-size: 16px;
+        // padding: 15px 14px;
+        .icon {
+          font-size: 23px;
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+`;
+const StyledBottom = styled.div`
+  .logout {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    cursor: pointer;
+    opacity: 0.6;
+    .icon {
+      font-size: 29px;
+      margin-right: 8px;
+    }
+
+    &:hover{
+      background: #c10000;
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: #fff;  
+      opacity: 1;
+    }
   }
 `;
 

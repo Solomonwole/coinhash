@@ -13,7 +13,7 @@ export const StyledH2 = styled.h2`
 `;
 export const StyledH3 = styled.h3`
   font-weight: 700;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 33px;
 `;
 export const StyledHP = styled.p`

@@ -40,31 +40,31 @@ const EthWallet = () => {
     <>
       {' '}
       <DashboardLayout>
-        <StyledPage>
-          <img src={btcbarcode} alt="" />
-          <StyledHP>
-            Amount: <b>{price}</b>
-          </StyledHP>
-          <div className="wallAdd">
-            <StyledHP className="wallet">Wallet address:</StyledHP>
-          </div>
-          <StyledCopy
-            onClick={handleCopy}
-          >
-            <AiOutlineCopy />
-            &nbsp; <b>0xDeBd....3807</b>
-          </StyledCopy>
-          <StyledInfo>
-            <b>Instruction:</b>
-            <p>- Copy your coinhash wallet address above to make deposit.</p>
-            <p>- Make deposit within 10mins, a timer is above. </p>
-            <p>- Send the exact amount above. </p>
-            <p>- Only click “Done” button after successful transfer.</p>
-          </StyledInfo>
-          <Link to="/dashboard" onClick={handleDone}>
-            <StyledButton>Done</StyledButton>
-          </Link>
-        </StyledPage>
+        <StyledBox>
+          <StyledPage>
+            <img src={btcbarcode} alt="" />
+            <StyledHP>
+              Amount: <b>{price}</b>
+            </StyledHP>
+            <div className="wallAdd">
+              <StyledHP className="wallet">Wallet address:</StyledHP>
+            </div>
+            <StyledCopy onClick={handleCopy}>
+              <AiOutlineCopy />
+              &nbsp; <b>0xDeBd....3807</b>
+            </StyledCopy>
+            <StyledInfo>
+              <b>Instruction:</b>
+              <p>- Copy your coinhash wallet address above to make deposit.</p>
+              <p>- Make deposit within 10mins, a timer is above. </p>
+              <p>- Send the exact amount above. </p>
+              <p>- Only click “Done” button after successful transfer.</p>
+            </StyledInfo>
+            <Link to="/dashboard" onClick={handleDone}>
+              <StyledButton className='btn'>Done</StyledButton>
+            </Link>
+          </StyledPage>
+        </StyledBox>
       </DashboardLayout>
       <ToastContainer />
     </>
@@ -72,9 +72,19 @@ const EthWallet = () => {
 };
 
 // Styling
+const StyledBox = styled.div`
+  width: 100%;
+  background: #011c37;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-top: 50px;
 
+  hr {
+    margin: 20px 0;
+  }
+`;
 const StyledPage = styled.div`
-  margin-top: 30px;
+  margin: 30px 0;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -91,9 +101,12 @@ const StyledPage = styled.div`
     justify-content: space-between;
     align-items: center;
   }
+  .btn{
+    background: #0AC389;
+  }
 `;
 const StyledInfo = styled.div`
-  color: #c10000;
+  color: #fff;
   text-align: start;
   margin: 30px 0;
 `;
@@ -102,8 +115,8 @@ const StyledCopy = styled.div`
   cursor: pointer;
   width: 55%;
   height: 50px;
-  background: rgb(14, 29, 44, 0.6);
-  padding: 0 10px;
+  background: #001020;
+  padding: 0 30px;
   border-radius: 8px;
   display: flex;
   align-items: center;

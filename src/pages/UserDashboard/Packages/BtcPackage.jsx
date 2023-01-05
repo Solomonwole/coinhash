@@ -1,4 +1,3 @@
-import DashboardLayout from '../../../layout/DashboardLayout';
 import styled from 'styled-components';
 import {
   StyledButton,
@@ -13,7 +12,6 @@ const BtcPackage = () => {
   const p2price = 10000;
   const p3price = 30000;
 
-
   const hadle500 = () => {
     localStorage.setItem('Price', pprice);
   };
@@ -26,10 +24,8 @@ const BtcPackage = () => {
 
   return (
     <>
-      <DashboardLayout>
-        <Styled>
-          <StyledH3 className="title">Select BTC Package</StyledH3>
-        </Styled>
+      <>
+        <Styled></Styled>
         <StyledP>
           <StyledBox>
             <StyledHead>
@@ -119,11 +115,25 @@ const BtcPackage = () => {
             </Link>
           </StyledBox>
         </StyledP>
-      </DashboardLayout>
+      </>
     </>
   );
 };
 // Styling
+const StyledP = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  @media screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+  }
+  @media screen and (min-width: 1338px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 20px;
+  }
+`;
 const StyledBox = styled.div`
   height: 460px;
   // width: 370px;
@@ -177,16 +187,4 @@ const Styled = styled.div`
   }
 `;
 
-const StyledP = styled.div`
-  @media screen and (min-width: 768px) {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 20px;
-  }
-  @media screen and (min-width: 1280px) {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 20px;
-  }
-`;
 export default BtcPackage;

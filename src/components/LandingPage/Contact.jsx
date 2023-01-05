@@ -13,7 +13,7 @@ const Contact = () => {
     <>
       <StyledContact>
         <img src={contact} alt="" className="timg" />
-        <StyledH3 classNamee="width">Send us a Message</StyledH3>
+        <StyledH3 className="width">Send us a Message</StyledH3>
 
         <StyledForm onSubmit={handleSubmit}>
           <input type="text" name="FullName" placeholder="Enter full name"/>

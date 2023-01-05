@@ -23,7 +23,7 @@ const DashboardLayout = ({ children }) => {
 const DashboardLayouts = styled.div`
 	position: relative;
 	display: grid;
-	grid-template-columns: 280px auto;
+	grid-template-columns: 217px auto;
 
 	grid-template-areas:
 		'sidebar nav'
@@ -38,14 +38,14 @@ const DashboardLayouts = styled.div`
 
 export const StyledDashboardContainer = styled.div`
 	grid-area: main;
-	padding: 3rem;
+	padding: 22px 40px;
 	overflow-x: hidden;
     
     
 
 	@media (max-width: 820px) {
-		padding-left: 21px;
-		padding-right: 21px;
+		padding-left: 20px;
+		padding-right: 20px;
 	}
 `;
 

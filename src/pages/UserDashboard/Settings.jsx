@@ -13,13 +13,23 @@ import ErrorMessage from '../../components/Error/ErrorMessage';
 import { toast, ToastContainer } from 'react-toastify';
 
 const Settings = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [trySubmit, setTrySubmit] = useState('');
   const [match, setMatch] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [load, setLoad] = useState(false);
+  const [btcwallet, setBtcwallet] = useState('');
+  const [ethwallet, setEthwallet] = useState('');
+
   const userName = localStorage.getItem('HashuserName');
   const userEmail = localStorage.getItem('HashuserEmail');
+
+  //  const btcwallet = localStorage.getItem('Hashbtcwallet');
+  //  const ethwallet = localStorage.getItem('Hashethwallet');
 
   useEffect(() => {
     if (password === confirmPassword) {
@@ -62,54 +72,105 @@ const Settings = () => {
       }
     }
   };
+  const handleSaveWallet = (e) => {
+    e.preventDefault();
+    setTrySubmit(true);
+    if (btcwallet || ethwallet !== '') {
+      setLoad(true);
+    } else {
+      setLoad(false);
+    }
+  };
   return (
     <>
       <DashboardLayout>
-        <StyledPage>
+        <StyledBox>
           <StyledH3>Profile</StyledH3>
-          <br />
+          <hr />
 
-          <StyledForm onSubmit={handleSubmit} autoComplete="off">
-            <label>Username</label>
-            <input type="text" value={userName} className="username" disabled />
-            <label>Email Address</label>
-            <input type="text" value={userEmail} disabled />
-          </StyledForm>
-
-          <br />
-
-          <StyledHP>Change Password</StyledHP>
-          <StyledForm onSubmit={handleSubmit}>
-            <input
-              type="password"
-              value={password}
-              onChange={handlePassword}
-              name="password"
-              placeholder="New password"
-            />
-            {!password && trySubmit ? (
-              <ErrorMessage error="Password should be at least 6 characters" />
-            ) : (
-              ''
-            )}
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={handleConfirmPassword}
-              name="confirm-password"
-              placeholder="Confirm password"
-            />
-            {!match && trySubmit ? (
-              <ErrorMessage
-                error={
-                  !confirmPassword
-                    ? 'Field Required'
-                    : 'Password does not match'
-                }
+          <StyledForm autoComplete="off">
+            <div className="flex">
+              <label>Username:</label>
+              <input
+                type="text"
+                value={userName}
+                className="username"
+                disabled
               />
-            ) : (
-              ''
-            )}
+            </div>
+            <div className="flex">
+              <label>Email Address:</label>
+              <input type="text" value={userEmail} disabled />
+            </div>
+          </StyledForm>
+        </StyledBox>
+        <br />
+        <StyledBox>
+          <StyledH3>Payout</StyledH3>
+          <hr />
+
+          <StyledForm onSubmit={handleSaveWallet} >
+            <div className="flex">
+              <label>BTC Wallet:</label>
+              <input
+                type="text"
+                value={btcwallet}
+                onChange={(e) => setBtcwallet(e.target.value)}
+                className="username"
+              />
+            </div>
+            <div className="flex">
+              <label>ETH Wallet:</label>
+              <input
+                type="text"
+                value={ethwallet}
+                onChange={(e) => setEthwallet(e.target.value)}
+              />
+            </div>
+           
+          </StyledForm>
+        </StyledBox>
+        <br />
+        <StyledBox>
+          <StyledHP>Change Password</StyledHP>
+          <hr />
+          <StyledForm onSubmit={handleSubmit}>
+            <div className="flex">
+              <label>New Password:</label>
+              <input
+                type="password"
+                value={password}
+                onChange={handlePassword}
+                name="password"
+                placeholder="New password"
+              />
+              {!password && trySubmit ? (
+                <ErrorMessage error="Password should be at least 6 characters" />
+              ) : (
+                ''
+              )}
+            </div>
+            <div className="flex">
+              <label>Confirm Password:</label>
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={handleConfirmPassword}
+                name="confirm-password"
+                placeholder="Confirm password"
+              />
+              {!match && trySubmit ? (
+                <ErrorMessage
+                  error={
+                    !confirmPassword
+                      ? 'Field Required'
+                      : 'Password does not match'
+                  }
+                />
+              ) : (
+                ''
+              )}
+            </div>
             {!loading ? (
               <StyledButton className="btn" type="submit">
                 Change password
@@ -120,7 +181,7 @@ const Settings = () => {
               </StyledButton>
             )}
           </StyledForm>
-        </StyledPage>
+        </StyledBox>
       </DashboardLayout>
       <ToastContainer />
     </>
@@ -129,25 +190,18 @@ const Settings = () => {
 
 // Styling
 
-const StyledPage = styled.div`
-  margin-top: 30px;
+const StyledBox = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  background: #011c37;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-top: 50px;
 
-  .info {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    text-align: start;
-
-    .first {
-      width: 30%;
-    }
+  hr {
+    margin: 20px 0;
   }
 `;
+
 const StyledForm = styled.form`
   width: 100%;
   display: flex;
@@ -155,11 +209,17 @@ const StyledForm = styled.form`
   justify-content: center;
   align-items: center;
 
+  .flex {
+    display: flex;
+    width: 100%;
+    align-items: center;
+  }
+
   .username {
     text-transform: capitalize;
   }
   label {
-    width: 100%;
+    width: 40%;
     text-align: start;
   }
 
