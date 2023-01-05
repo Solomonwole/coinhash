@@ -272,6 +272,7 @@ const StyledTab = styled.div`
   border-radius: 8px;
   color: #fff;
   margin-right: 10px;
+  cursor: pointer;
 
   display: flex;
   flex-direction: column;

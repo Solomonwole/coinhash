@@ -5,6 +5,7 @@ import { SlSpeedometer } from 'react-icons/sl';
 import { GiFireAxe } from 'react-icons/gi';
 import { MdErrorOutline } from 'react-icons/md';
 import { FaBoxes } from 'react-icons/fa';
+import { AiFillFile } from 'react-icons/ai';
 
 function ETH() {
   const username = localStorage.getItem('HashuserName');
@@ -43,6 +44,15 @@ function ETH() {
               </div>
             </div>
             <hr />
+            <div className="content">
+              <div className="circle">
+                <AiFillFile className='icon'/>
+              </div>
+
+              <StyledHP className='message'>
+                Looks like there are not <br /> any assets in your account yet.
+              </StyledHP>
+            </div>
           </StyledBoxRev>
           <Space />
           <div className="top">
@@ -157,6 +167,27 @@ const StyledBoxRev = styled.div`
 
   hr {
     margin: 20px 0;
+  }
+
+  .content{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+    color: rgba(255,255,255, 0.5);
+    text-align: center;
+
+    .circle{
+        border-radius: 50%;
+        padding: 15px 18px;
+        background: rgba(10,195,137, 0.6);
+
+        .icon{
+            font-size: 25px;
+        }
+    }
   }
 `;
 const StyledBox = styled.div`
