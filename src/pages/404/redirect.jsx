@@ -30,6 +30,16 @@ const StyledPage = styled.div`
 
   img {
     width: 40%;
+
+    @media screen and (max-width: 820px){
+        width: 500px;
+    }
+    @media screen and (max-width: 375px){
+        width: 450px;
+    }
+    @media screen and (max-width: 320px){
+        width: 330px;
+    }
   }
 
   .btn {
