@@ -27,7 +27,7 @@ const DashboardPage = () => {
   // };
   return (
     <>
-      <>
+      <StyledDash>
         <StyledTabs>
           <StyledTab
             className={tab === 1 ? 'active' : 'in-active'}
@@ -126,7 +126,7 @@ const DashboardPage = () => {
             <StyledHP className="not">No transactions yet!</StyledHP>
           </StyledHistory>
         </> */}
-      </>
+      </StyledDash>
       <CoinSelect open={open} close={() => setOpen(false)} />
       <ToastContainer />
     </>
@@ -220,6 +220,9 @@ const DashboardPage = () => {
 
 // `;
 
+const StyledDash = styled.div`
+overflow-x: hidden;
+`
 const StyledWelcome = styled.div`
   display: flex;
   width: 100%;
