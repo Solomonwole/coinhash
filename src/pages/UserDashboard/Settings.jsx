@@ -91,12 +91,12 @@ const Settings = () => {
                 type="text"
                 value={userName}
                 className="username"
-                disabled
+                
               />
             </div>
             <div className="flex">
               <label>Email Address:</label>
-              <input type="text" value={userEmail} disabled />
+              <input type="text" value={userEmail} />
             </div>
           </StyledForm>
         </StyledBox>
