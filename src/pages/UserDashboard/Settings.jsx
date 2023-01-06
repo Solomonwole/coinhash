@@ -1,5 +1,4 @@
 import DashboardLayout from '../../layout/DashboardLayout';
-import { updateProfile } from 'firebase/auth';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { auth } from '../../firebase/FirebaseConfig';
@@ -21,7 +20,6 @@ const Settings = () => {
   const [trySubmit, setTrySubmit] = useState('');
   const [match, setMatch] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [load, setLoad] = useState(false);
   const [btcwallet, setBtcwallet] = useState('');
   const [ethwallet, setEthwallet] = useState('');
 
@@ -76,9 +74,7 @@ const Settings = () => {
     e.preventDefault();
     setTrySubmit(true);
     if (btcwallet || ethwallet !== '') {
-      setLoad(true);
     } else {
-      setLoad(false);
     }
   };
   return (

@@ -5,14 +5,16 @@ import btcbarcode from '../../assets/Dashboard/barcode.jpg';
 import { AiOutlineCopy } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
+// import { db, auth } from '../../firebase/FirebaseConfig';
+// import { doc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection } from 'firebase/firestore';
 import { db, auth } from '../../firebase/FirebaseConfig';
-import { doc, updateDoc } from 'firebase/firestore';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 const BtcWallet = () => {
   const price = localStorage.getItem('Price');
-  const btcwallet = localStorage.getItem('BTC');
-  const [date, setDate] = useState(new Date());
+  // const [date, setDate] = useState(new Date());
+  const user = auth.currentUser;
 
   const handleCopy = () => {
     navigator.clipboard.writeText('bc1q763k9npdy9sddy5krww38nwmntdj894klnmwep');
@@ -24,27 +26,34 @@ const BtcWallet = () => {
   const handleDone = async (id) => {
     toast.success('Verifying transaction...');
 
-    try {
-      setDate(new Date());
-      const day = date.getUTCDate();
-      const month = date.toLocaleString('en-US', { month: 'short' });
-      const year = date.getUTCFullYear();
+  //   try {
+  //     setDate(new Date());
+  //     const day = date.getUTCDate();
+  //     const month = date.toLocaleString('en-US', { month: 'short' });
+  //     const year = date.getUTCFullYear();
 
-      const fullDate = { day, month, year };
+  //     const fullDate = { day, month, year };
 
-      const userRef = doc(db, 'users', auth.currentUser.uid);
-      updateDoc(userRef, {
-        balance: price,
-        btc: price,
-        btcwallet: btcwallet,
-        price: price,
-        date: fullDate,
-      });
-      console.log(fullDate);
-    } catch (error) {}
-    localStorage.removeItem('BTC');
-    localStorage.removeItem('ETH');
-    localStorage.removeItem('Price');
+  //     const userRef = doc(db, 'users', auth.currentUser.uid);
+  //     updateDoc(userRef, {
+  //       balance: price,
+  //       btc: price,
+  //       price: price,
+  //       date: fullDate,
+  //     });
+  //     console.log(fullDate);
+  //   } catch (error) {}
+  //   localStorage.removeItem('Price');
+
+  try {
+    addDoc(collection(db, 'btc'), {
+      userName: user.displayName,
+      email: user.email,
+      uid: user.uid,
+      price: price,
+    });
+  } catch (error) {}
+  localStorage.removeItem('Price');
   };
   return (
     <>

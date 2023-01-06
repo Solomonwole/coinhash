@@ -10,7 +10,6 @@ import { db, auth } from '../../firebase/FirebaseConfig';
 
 const EthWallet = () => {
   const price = localStorage.getItem('Price');
-  const ethwallet = localStorage.getItem('ETH');
   const user = auth.currentUser;
 
   const handleCopy = () => {
@@ -29,11 +28,8 @@ const EthWallet = () => {
         email: user.email,
         uid: user.uid,
         price: price,
-        eth: ethwallet,
       });
     } catch (error) {}
-    localStorage.removeItem('BTC');
-    localStorage.removeItem('ETH');
     localStorage.removeItem('Price');
   };
   return (
