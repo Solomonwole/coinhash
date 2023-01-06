@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import { addDoc, collection } from 'firebase/firestore';
 import { db, auth } from '../../firebase/FirebaseConfig';
+import CountdownTimer from '../../components/CountDownTimer';
 
 const EthWallet = () => {
   const price = localStorage.getItem('Price');
@@ -38,6 +39,9 @@ const EthWallet = () => {
       <DashboardLayout>
         <StyledBox>
           <StyledPage>
+          <div className="timer">
+            <CountdownTimer minutes={9} seconds={59} />
+            </div>
             <img src={btcbarcode} alt="" />
             <StyledHP>
               Amount: <b>{price}</b>
@@ -99,6 +103,10 @@ const StyledPage = styled.div`
   }
   .btn{
     background: #0AC389;
+  }
+  .timer{
+    margin-bottom: 10px;
+    color: #0AC389;
   }
 `;
 const StyledInfo = styled.div`

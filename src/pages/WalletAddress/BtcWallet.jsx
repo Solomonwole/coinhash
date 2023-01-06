@@ -9,6 +9,7 @@ import { toast, ToastContainer } from 'react-toastify';
 // import { doc, updateDoc } from 'firebase/firestore';
 import { addDoc, collection } from 'firebase/firestore';
 import { db, auth } from '../../firebase/FirebaseConfig';
+import CountdownTimer from '../../components/CountDownTimer';
 // import { useState } from 'react';
 
 const BtcWallet = () => {
@@ -60,6 +61,9 @@ const BtcWallet = () => {
       <DashboardLayout>
         <StyledBox>
           <StyledPage>
+            <div className="timer">
+            <CountdownTimer minutes={9} seconds={59} />
+            </div>
             <img src={btcbarcode} alt="" />
             <StyledHP>
               Amount: <b>${price}</b>
@@ -121,6 +125,10 @@ const StyledPage = styled.div`
   }
   .btn{
     background: #0AC389;
+  }
+  .timer{
+    margin-bottom: 10px;
+    color: #0AC389;
   }
 `;
 const StyledInfo = styled.div`
