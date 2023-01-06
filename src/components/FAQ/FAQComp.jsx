@@ -15,32 +15,29 @@ const FAQComp = () => {
     {
       id: 2,
       question: 'What kind of cryptocurrencies do you mine?',
-      answer:
-        'The first thing you need to do is sign up on REPUTE website after which you can now login to your dashboard. On your dashboard, click on the “New Complaint” button. This will take you to a removal request page. Fill out the form correctly and submit. A lawyer will contact you and the process of taking down the bad review will begin. Once the review is taken down successfully, you will get a notification on your dashboard. ',
+      answer: '',
       open: false,
     },
 
     {
       id: 3,
       question: 'What commission does CoinHash charge?',
-      answer:
-        'Depending on a number of factors, reputation management can take a few days or more, but give or take, a maximum of a week.',
+      answer: '',
       open: false,
     },
 
     {
       id: 4,
       question: 'How can I pay for mining power?',
-      answer:
-        'Unfortunately, No. We have a team of highly professional lawyers on REPUTE who are ready to give their best and go all out in ensuring that your brand is free from negative reviews. So, rest assured that you are in safe hands and you will receive Excellent results',
+      answer: '',
       open: false,
     },
 
     {
       id: 5,
-      question: 'I have purchased some hashpower. When will I receive my first payout?',
-      answer:
-        'That is not a problem. on the removal request form, there are options for where the review was left. Tick the one that is applicable to you and relax while REPUTE fixes it for you.',
+      question:
+        'I have purchased some hashpower. When will I receive my first payout?',
+      answer: '',
       open: false,
     },
   ]);
