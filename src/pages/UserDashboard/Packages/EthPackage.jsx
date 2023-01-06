@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 const EthPackage = () => {
   const pprice = '$5500';
   const p2price = '$15000';
-  const p3price = '$4000';
+  const p3price = '$40000';
 
   const hadle500 = () => {
     localStorage.setItem('Price', pprice);

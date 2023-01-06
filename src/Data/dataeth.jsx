@@ -1,7 +1,7 @@
 const ethData = [
     {
         days: "91 Days | 6T",
-        price: "$5000",
+        price: "$5500",
         hashfee: "0.0071 USD/T/Days",
         electricity: "0.0071 USD/T/Days",
         historical: "0.0071 USD/T/Days",
@@ -10,7 +10,7 @@ const ethData = [
       },
     {
         days: "91 Days | 6T",
-        price: "$10000",
+        price: "$15000",
         hashfee: "0.0071 USD/T/Days",
         electricity: "0.0071 USD/T/Days",
         historical: "0.0071 USD/T/Days",
@@ -19,7 +19,7 @@ const ethData = [
       },
     {
         days: "91 Days | 6T",
-        price: "$30000",
+        price: "$40000",
         hashfee: "0.0071 USD/T/Days",
         electricity: "0.0071 USD/T/Days",
         historical: "0.0071 USD/T/Days",
