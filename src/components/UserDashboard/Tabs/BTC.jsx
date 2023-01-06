@@ -12,10 +12,10 @@ function BTC() {
   const email = localStorage.getItem('HashuserEmail');
   return (
     <>
-      <StyledPage>
+      <StyledG>
         <StyledContent>
           <div className="top">
-            <StyledBox>
+            <StyledBox className="left">
               <div className="icon">
                 <SlSpeedometer />
               </div>
@@ -25,7 +25,7 @@ function BTC() {
               </div>
             </StyledBox>
 
-            <StyledBox>
+            <StyledBox className="right">
               <div className="icon">
                 <GiFireAxe />
               </div>
@@ -47,22 +47,22 @@ function BTC() {
 
             <div className="content">
               <div className="circle">
-                <AiFillFile className='icon'/>
+                <AiFillFile className="icon" />
               </div>
 
-              <StyledHP className='message'>
+              <StyledHP className="message">
                 Looks like there are not <br /> any assets in your account yet.
               </StyledHP>
             </div>
           </StyledBoxRev>
           <Space />
           <div className="top">
-            <StyledBoxes>
+            <StyledBoxes className="left">
               <SlSpeedometer className="icon" />
               <StyledH3>$0.00</StyledH3>
               <StyledHP>Wallet Balance (BTC)</StyledHP>
             </StyledBoxes>
-            <StyledBoxes>
+            <StyledBoxes className="right">
               <MdErrorOutline className="icon" />
               {/* <StyledH3>65444.90 TH/s</StyledH3> */}
               <StyledHP>
@@ -102,7 +102,7 @@ function BTC() {
             </div>
           </StyledBox2Side>
         </StyledSide>
-      </StyledPage>
+      </StyledG>
       <Space />
     </>
   );
@@ -114,10 +114,13 @@ const Space = styled.div`
   margin: 20px 0;
 `;
 
-const StyledPage = styled.div`
-display: flex;
-justify-content: space-between:
+const StyledG = styled.div`
+  display: flex;
+  justify-content: space-between;
 
+  @media screen and (max-width: 769px) {
+    flex-direction: column;
+  }
 `;
 const StyledContent = styled.div`
   width: 70%;
@@ -128,10 +131,30 @@ const StyledContent = styled.div`
     align-items: center;
     width: 100%; 
   }
+  @media screen and (max-width: 769px){
+    width: 100%;
+
+    .left{
+        margin-right: 10px;
+    }
+    .right{
+        margin-left: 10px;
+    }
+  }
+  @media screen and (max-width: 562px){
+    .top{
+        flex-direction: column;
+    }
+    .left{
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    .right{
+        margin-left: 0;
+    }
+  }
 `;
-const StyledSide = styled.div`
-  width: 30%;
-`;
+
 const StyledBoxes = styled.div`
   width: 50%;
   height: 250px;
@@ -149,6 +172,13 @@ const StyledBoxes = styled.div`
   .icon {
     font-size: 35px;
     margin-bottom: 15px;
+  }
+  @media screen and (max-width: 769px) {
+    margin-right: 0;
+    margin-bottom: 30px;
+  }
+  @media screen and (max-width: 562px){
+    width: 100%;
   }
 `;
 const StyledBoxRev = styled.div`
@@ -170,25 +200,29 @@ const StyledBoxRev = styled.div`
     margin: 20px 0;
   }
 
-  .content{
+  .content {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 70%;
-    color: rgba(255,255,255, 0.5);
+    color: rgba(255, 255, 255, 0.5);
     text-align: center;
 
-    .circle{
-        border-radius: 50%;
-        padding: 15px 18px;
-        background: rgba(10,195,137, 0.6);
+    .circle {
+      border-radius: 50%;
+      padding: 15px 18px;
+      background: rgba(10, 195, 137, 0.6);
 
-        .icon{
-            font-size: 25px;
-        }
+      .icon {
+        font-size: 25px;
+      }
     }
+  }
+
+  @media screen and (max-width: 769px) {
+    width: 100%;
   }
 `;
 const StyledBox = styled.div`
@@ -206,10 +240,24 @@ const StyledBox = styled.div`
     font-size: 35px;
     margin-right: 15px;
   }
+
+  @media screen and (max-width: 769px) {
+    margin-right: 0;
+  }
+  @media screen and (max-width: 562px){
+    width: 100%;
+  }
 `;
 
 // Side styling
 
+const StyledSide = styled.div`
+  width: 30%;
+
+  @media screen and (max-width: 769px) {
+    width: 100%;
+  }
+`;
 const StyledBoxSide = styled.div`
   background: #011c37;
   padding: 10px 15px;
@@ -232,6 +280,15 @@ const StyledBox2Side = styled.div`
   margin-top: 50px;
   hr {
     margin: 10px 0;
+  }
+
+  .flex {
+    overflow: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 `;
 

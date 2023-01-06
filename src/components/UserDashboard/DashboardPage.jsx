@@ -87,7 +87,7 @@ const DashboardPage = () => {
         <StyledWelcome>
           <Link to="/settings">
             {' '}
-            <StyledHP end>Hi, {userName} </StyledHP>
+            <StyledHP>Hi, {userName} </StyledHP>
           </Link>
           <Link to="/settings">
             {' '}
@@ -225,6 +225,7 @@ const StyledWelcome = styled.div`
   width: 100%;
   justify-content: flex-end;
   aign-items: center;
+  margin-bottom: 20px;
   .icon {
     font-size: 25px;
     margin-left: 5px;
@@ -234,6 +235,8 @@ const StyledWelcome = styled.div`
   a:hover {
     color: #0ac389;
   }
+
+  
 `;
 
 const StyledTabs = styled.div`
