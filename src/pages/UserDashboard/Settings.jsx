@@ -10,11 +10,13 @@ import {
 } from '../../components/Styles/Styled';
 import ErrorMessage from '../../components/Error/ErrorMessage';
 import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Settings = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  const navigate = useNavigate();
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [trySubmit, setTrySubmit] = useState('');
@@ -57,6 +59,8 @@ const Settings = () => {
             updatePassword(user, password);
             toast.success('Password changed');
             setLoading(false);
+            auth.signOut();
+            navigate("/login");
           } catch (error) {
             toast.error(error.message);
             setLoading(false);
