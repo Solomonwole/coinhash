@@ -21,7 +21,7 @@ const CountdownTimer = ({ minutes, seconds }) => {
 
   return (
     <div>
-      Time left: {timeLeft.minutes}:{timeLeft.seconds}
+     <b> Time left: {timeLeft.minutes}:{timeLeft.seconds}</b>
     </div>
   );
 };

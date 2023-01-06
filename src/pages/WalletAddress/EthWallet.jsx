@@ -106,7 +106,6 @@ const StyledPage = styled.div`
   }
   .timer{
     margin-bottom: 10px;
-    color: #0AC389;
   }
 `;
 const StyledInfo = styled.div`
