@@ -81,12 +81,6 @@ const SignupComponent = () => {
                   setDoc(doc(db, 'users', userCredential.user.uid), {
                     username: username,
                     email: email,
-                    balance: 0.0,
-                    btc: 0.0,
-                    eth: 0.0,
-                    btcwallet: '',
-                    ethwallet: '',
-                    price: '',
                   });
                   auth.useDeviceLanguage();
                   sendEmailVerification(userCredential.user);
