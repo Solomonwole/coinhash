@@ -14,8 +14,9 @@ const FAQComp = () => {
 
     {
       id: 2,
-      question: 'What kind of cryptocurrencies do you mine?',
-      answer: '',
+      question: 'What is cloud mining?',
+      answer:
+        'Cloud mining is rent of mining equipment hash power. In this case, you do not need to buy expensive mining equipment and do not bear any risks associated with its breakdown. You do not incur additional costs for the hosting and maintenance of equipment, as well as for any malfunction. When you buy a cloud mining hashrate, you pay a fixed amount for the use of devices located in the CoinHash data center. The main advantage of cloud mining is the quick receipt of BTC to your wallet.',
       open: false,
     },
 
