@@ -15,8 +15,6 @@ import Withdraw from "../pages/UserDashboard/Withdraw";
 import Workers from "../pages/UserDashboard/Workers";
 import BtcWallet from "../pages/WalletAddress/BtcWallet";
 import EthWallet from "../pages/WalletAddress/EthWallet";
-// import Bitcoin from "../pages/WalletInput/Bitcoin";
-// import ETH from "../pages/WalletInput/ETH";
 import { RequireLoggedIn } from "../utils/Protect";
 
 const RouterPage = () => {

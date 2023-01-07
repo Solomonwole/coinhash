@@ -100,7 +100,7 @@ const StyledForm = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 70%;
+  width: 100%;
 
   input {
     background: rgb(14, 29, 44, 0.6);

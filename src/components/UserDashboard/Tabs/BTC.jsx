@@ -5,7 +5,8 @@ import { SlSpeedometer } from 'react-icons/sl';
 import { GiFireAxe } from 'react-icons/gi';
 import { MdErrorOutline } from 'react-icons/md';
 import { FaBoxes } from 'react-icons/fa';
-import { AiFillFile } from 'react-icons/ai';
+// import { AiFillFile } from 'react-icons/ai';
+import BarChart from '../../BarChart/BarChart ';
 
 function BTC() {
   const username = localStorage.getItem('HashuserName');
@@ -46,13 +47,15 @@ function BTC() {
             <hr />
 
             <div className="content">
-              <div className="circle">
+              {/* <div className="circle">
                 <AiFillFile className="icon" />
               </div>
 
               <StyledHP className="message">
                 Looks like there are not <br /> any assets in your account yet.
-              </StyledHP>
+              </StyledHP> */}
+
+              <BarChart  />
             </div>
           </StyledBoxRev>
           <Space />
@@ -184,7 +187,7 @@ const StyledBoxes = styled.div`
 const StyledBoxRev = styled.div`
   margin-top: 50px;
   width: 97%;
-  height: 350px;
+  // height: 350px;
   margin-right: 20px;
   background: #011c37;
   padding: 10px 15px;
@@ -204,9 +207,9 @@ const StyledBoxRev = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 70%;
+    // justify-content: center;
+    // align-items: center;
+    // height: 70%;
     color: rgba(255, 255, 255, 0.5);
     text-align: center;
 
