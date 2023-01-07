@@ -41,7 +41,7 @@ function BTC() {
             <div className="header">
               <StyledHP>My revenue (BTC)</StyledHP>
               <div className="date">
-                <StyledHP>Date range:</StyledHP>
+                <StyledHP>Date range</StyledHP>
               </div>
             </div>
             <hr />

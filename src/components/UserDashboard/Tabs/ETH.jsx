@@ -41,7 +41,7 @@ function ETH() {
             <div className="header">
               <StyledHP>My revenue (ETH)</StyledHP>
               <div className="date">
-                <StyledHP>Date range:</StyledHP>
+                <StyledHP>Date range</StyledHP>
               </div>
             </div>
             <hr />
